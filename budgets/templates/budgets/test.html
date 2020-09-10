@@ -1,0 +1,22 @@
+{% extends 'budgets/base_budget.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container mt-3">
+  <div>
+      <h3>{{ budget.name }}</h3>
+  </div>
+  {% for data in object_list %}
+  <p>
+      {{ data.date }}
+      {{ data.expense_name }}
+      {{ data.cost }}
+      <a href="{% url 'delete_budget_data' pk=data.pk %}" class="btn badge badge-danger">Удалить</a>
+      <br>
+      <hr>
+
+  </p>
+  {% endfor %}
+</div> <!-- /container -->
+
+{% endblock %}

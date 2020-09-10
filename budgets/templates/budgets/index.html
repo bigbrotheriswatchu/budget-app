@@ -1,0 +1,44 @@
+{% extends 'budgets/base_budget.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container col-11">
+  <div class="col-4 float-left">
+    <h4 class="mt-5 font-weight-bold">Добавить бюджет:</h4>
+    <form method="post" class="mt-3">
+
+        {% csrf_token %}
+        {{ form.name|as_crispy_field }}
+        {{ form.my_funds|as_crispy_field }}
+        {{ form.budget_description|as_crispy_field }}
+        <button type="submit" class="btn btn-outline-dark mt-4 btn-sm" value="Save">Сохранить</button>
+    </form>
+  </div>
+  <div class="row col-8  mt-5 float-right">
+      {% for budget in object_list %}
+
+          <div class="card border border-success col-md-5 ml-2 mb-2 shadow-sm">
+              <div class="card-body">
+                  <p class="card-text bu">
+                    <h6 class="font-weight-bold">{{ budget.name }}</h6>
+                  <hr>
+                    <small class="font-italic small-text"><p>{{ budget.budget_description }}</p></small>
+                    
+                    <small class="font-weight-bold">Бюджет создан:</small>
+                    <br>
+                    <small class="font-italic small-text text-muted"> {{ budget.pub_date }}</small>
+                    <br>
+                    <small class="font-weight-bold">Баланс:</small>
+                    <small>{{ budget.balance }}</small>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                          <a href="{% url 'budget_data_list' budget.pk %}" type="button" class="btn btn-outline-success btn-sm">Перейти</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        {% endfor %}
+  </div>
+</div>
+{% endblock %}

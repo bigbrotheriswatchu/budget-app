@@ -1,0 +1,10 @@
+{% extends 'budgets/base_budget.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<form method="post" class="form-inline mt-3">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-outline-dark mt-4 ml-2 btn-sm" value="Save">Сохранить</button>
+</form>
+{% endblock %}
